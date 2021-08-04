@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "method-override": "^3.0.0",
     "mysql": "^2.18.1"
-  }
+  },
+  "type": "module"
 }

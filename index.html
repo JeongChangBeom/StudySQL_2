@@ -7,8 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    <form action=''></form>
-        <input type='button' value = '컬럼 생성' />
-      </form>
+    <button id = 'button' onclick="location.href='/postall'">postall</button>
+    <button id2 = 'button' onclick="location.href='/post/1'">idtext</button>
+
+    <form action="/post/2?_method=DELETE" method="POST">
+        <input type ='submit' value ='delete'>
+    </form>
+
+    <form action="/post/" method="POST">
+        <input type="text" name = "id">
+        <textarea name = "text" rows = 5 cols = 25></textarea>
+        <input type="submit" value="수정">
+    </form>
+
+    <form action="/post/?_method=PUT" method="POST">
+        <input type="text" name = "id">
+        <input type="text" name = "user">
+        <textarea name = "text" rows = 5 cols = 25></textarea>
+        <input type="submit" value="추가">
+    </form>
+
 </body>
 </html>

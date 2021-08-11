@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended : false }));
 var connection = createConnection({
     host:'127.0.0.1',
     user:'root',
-    password:'qwopaskl1234!'
+    password:'qwopaskl1234!' 
 });
 
 connection.query('use study');
@@ -36,16 +36,8 @@ app.get('/postall', (req, res) => {
     });
 })
 
-app.get('/post/1', (req, res) => {
-    connection.query('SELECT text FROM post WHERE id = 1', (error, rows, fields)=>{
-        if(error) throw error;
-        res.send(rows);
-    });
-})
-
-
 app.get('/post/:id', (req, res) => {
-    connection.query('SELECT text FROM post WHERE id = ?', [req.params.id] ,(error, rows, fields)=>{
+    connection.query('SELECT post.id as PID, post.user as PostUser, post.text as PostText, coment.id as CommentID, coment.user as CommentUser, coment.text as CommentText FROM post JOIN coment ON post.id = coment.postid WHERE post.id = ?', [req.params.id] ,(error, rows, fields)=>{
         if(error) throw error;
         res.send(rows);
     });
@@ -81,6 +73,27 @@ app.put('/post',(req,res) => {
     });
 })
 
+app.put('/post/:CommentID',(req,res) => {
+    connection.query('DELETE FROM coment WHERE id = ?', [req.body.CommentID], (error, rows, fields) =>{
+        if(error) {
+            console.log(req.params.id);
+            throw error;
+        }
+        console.log('댓글추가');
+        res.redirect('/post/1');
+    });
+})
+
+app.delete('/post/:CommentID',(req,res) => {
+    connection.query('INSERT INTO coment (id,text,user,postid) VALUES (?,?,?,1)', [req.body.CommentID, req.body.CommentText, req.body.CommentUser], (error, rows, fields) =>{
+        if(error) {
+            console.log(req.params.id);
+            throw error;
+        }
+        console.log('댓글삭제');
+        res.redirect('/post/1');
+    });
+})
 
 app.listen(port, () => {
     console.log('App listening on port 3000');

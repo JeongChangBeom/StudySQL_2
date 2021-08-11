@@ -7,11 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <button id = 'button' onclick="location.href='/postall'">postall</button>
-    <button id2 = 'button' onclick="location.href='/post/1'">idtext</button>
+    <button id = 'button' onclick="location.href='/postall'">데이터 전체 보기</button>
 
     <form action="/post/2?_method=DELETE" method="POST">
-        <input type ='submit' value ='delete'>
+        <input type ='submit' value ='2번 삭제'>
     </form>
 
     <form action="/post/" method="POST">
@@ -25,6 +24,22 @@
         <input type="text" name = "user">
         <textarea name = "text" rows = 5 cols = 25></textarea>
         <input type="submit" value="추가">
+    </form>
+
+    <form action="/post/1?_method=GET" method="GET">
+        <input type ='submit' value ='1번 게시물'>
+    </form>
+
+    <form action="/post/111?_method=PUT" method="POST">
+        <input type="text" name = "CommentID">
+        <input type="text" name = "CommentUser">
+        <textarea name = "CommentText" rows = 5 cols = 25></textarea>
+        <input type="submit" value="댓글추가">
+    </form>
+
+    <form action="/post/:CommentID?_method=DELETE" method="POST">
+        <input type="text" name = "CommentID">
+        <input type="submit" value="댓글삭제">
     </form>
 
 </body>
